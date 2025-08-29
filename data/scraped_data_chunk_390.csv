@@ -1,0 +1,270 @@
+title,url,time_added,tags,status,content
+D3.js - Data-Driven Documents,http://d3js.org/,1450777716,corsi|dataviz|java,unread,
+Baseball pitches illustrated | Lokesh Dhakar,https://lokeshdhakar.com/baseball-pitches-illustrated/,1685292136,,unread,
+Alliance for Permanent Access Network | Excellence in DIgital Preservation,http://www.alliancepermanentaccess.org/,1507264818,,unread,
+Learn | Codecademy,https://www.codecademy.com/learn,1449480124,corsi,unread,
+Principio di Peter - Wikipedia,https://it.wikipedia.org/wiki/Principio_di_Peter,1618493667,,unread,
+"The Flask Mega-Tutorial, Part I: Hello, World! - miguelgrinberg.com",https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world,1728556237,flask,unread,
+Directions Service  |  Google Maps JavaScript API  |  Google Developers,https://developers.google.com/maps/documentation/javascript/directions,1480663672,css,unread,"This page describes the client-side service available with the Maps JavaScript API.
+  If you want to work with Google Maps web services on your server, take a look at the
+  Node.js Client for Google Maps Services. The page at that link also
+   introduces the Java Client, Python Client and Go Client for Google Maps Services. You can calculate directions (using a variety of methods
+  of transportation) by using the DirectionsService
+  object. This object communicates with the Google Maps API Directions
+  Service which receives direction requests and returns an efficient path.
+  Travel time is the primary factor which is optimized, but other factors
+  such as distance, number of turns and many more may be taken into account.
+  You may either handle these directions results yourself or use the
+  DirectionsRenderer object to render these
+  results. When specifying the origin or destination in a directions request,
+  you can specify a query string (for example, ""Chicago, IL"" or
+  ""Darwin, NSW, Australia""), a LatLng value, or a
+  Place object. The Directions service can return multi-part directions using a series
+  of waypoints. Directions are displayed as a polyline drawing
+  the route on a map, or additionally as a series of textual
+  description within a <div> element (for example,
+  ""Turn right onto the Williamsburg Bridge ramp""). Before using the Directions service in the Maps JavaScript API, first ensure
+  that the Directions API (Legacy) is enabled in the Google Cloud console, in the same
+  project you set up for the Maps JavaScript API. To view your list of enabled APIs: To learn about pricing and usage policies for the JavaScript Directions service, see
+Usage and Billing
+for the Directions API (Legacy). Use of the Directions service must be in accordance with the
+policies described
+for the Directions API (Legacy). Accessing the Directions service is asynchronous, since
+  the Google Maps API needs to make a call to an external
+  server. For that reason, you need to pass a callback
+  method to execute upon completion of the request. This
+  callback method should process the result(s). Note that the
+  Directions service may return more than one possible itinerary
+  as an array of separate routes[]. To use directions in the Maps JavaScript API, create an object of
+  type DirectionsService and call
+  DirectionsService.route() to initiate a request
+  to the Directions service, passing it a
+  DirectionsRequest object literal
+  containing the input terms and a callback method to execute
+  upon receipt of the response. The DirectionsRequest object literal contains the
+  following fields: These fields are explained below: unitSystem (optional) specifies what
+    unit system to use when displaying results. Valid values are
+    specified in Unit Systems below. waypoints[] (optional) specifies
+    an array of DirectionsWaypoints. Waypoints alter
+    a route by routing it through the specified location(s).
+    A waypoint is specified as an object literal with fields
+    shown below: (For more information on waypoints, see Using
+    Waypoints in Routes below.) Below is a sample DirectionsRequest: When you calculate directions, you need to specify
+  which transportation mode to use. The following travel
+  modes are currently supported: Consult the Google Maps Platform Coverage Details
+  to determine to what extent a country supports directions. If you request
+  directions for a region in which that direction type is not available,
+  the response will return the
+  DirectionsStatus=""ZERO_RESULTS"". Note: Walking directions may not include clear
+  pedestrian paths, so walking directions will return warnings in the
+  DirectionsResult. These warnings must always be displayed to the
+  user. If you do not use the default DirectionsRenderer then you
+  are responsible for ensuring the warnings are displayed. The available options for a directions request vary between travel modes.
+  When requesting transit directions, the avoidHighways,
+  avoidTolls, waypoints[] and
+  optimizeWaypoints options will be ignored. You can specify
+  transit specific routing options through the
+  TransitOptions
+  object literal. Transit directions are time sensitive. Directions will only be returned for
+  times in the future. The TransitOptions object literal contains the following
+  fields: These fields are explained below: A sample DirectionsRequest by transit is shown below: You can specify routing options for driving directions through the
+  DrivingOptions
+  object. The DrivingOptions object contains the following fields: These fields are explained below: Below is a sample DirectionsRequest for driving directions: By default, directions are calculated and displayed using
+  the unit system of the origin's country or region.
+  (Note: Origins expressed using
+  latitude/longitude coordinates rather than addresses always default
+  to metric units.) For example, a route from
+  ""Chicago, IL"" to ""Toronto, ONT"" will display results in miles, while
+  the reverse route will display results in kilometers. You
+  can override this unit system by setting one explicitly within the
+  request using one of the following UnitSystem
+  values: Note: This unit system setting only
+  affects the text displayed to the user. The directions result also
+  contains distance values, not shown to the user, which are always
+  expressed in meters. The Google Maps API Directions Service returns address results influenced
+  by the domain (region or country) from which you loaded the JavaScript
+  bootstrap. (Since most users load https://maps.googleapis.com/
+  this sets an implicit domain to the United States.) If you load the
+  bootstrap from a different supported domain, you will get results
+  influenced by that domain. For example, searches for ""San Francisco"" may
+  return different results from applications loading
+  https://maps.googleapis.com/ (the United States) than one
+  loading http://maps.google.es/ (Spain). You can also set the Directions service to return results biased to a
+  particular region using the region parameter. This parameter
+  takes a region code, specified as a two-character (non-numeric) Unicode
+  region subtag. In most cases, these tags map directly to ccTLD (""top-level
+  domain"") two-character values such as ""uk"" in ""co.uk"" for example. In some
+  cases, the region tag also supports ISO-3166-1 codes, which
+  sometimes differ from ccTLD values (""GB"" for ""Great Britain"" for example). When using the region parameter: Region biasing is supported only for the countries and regions supporting
+  directions. Consult Google Maps Platform Coverage Details
+  to see international coverage for the Directions API (Legacy). Initiating a directions request to the
+  DirectionsService with the route() method
+  requires passing a callback which executes upon completion of the
+  service request. This callback will return a
+  DirectionsResult and a DirectionsStatus
+  code in the response. The DirectionsStatus may return the following values: You should ensure that the directions query returned valid
+  results by checking this value before processing the result. The DirectionsResult contains the result of the
+  directions query, which you may either handle yourself, or pass
+  to a DirectionsRenderer object, which can
+  automatically handle displaying the result on a map. To display a DirectionsResult using a
+  DirectionsRenderer, you need to do the
+  following: The following example calculates directions between
+  two locations on Route 66, where the origin and destination
+  are set by the given ""start"" and ""end""
+  values in the dropdown lists. The DirectionsRenderer
+  handles display of the polyline between the indicated
+  locations, and the placement of markers at the origin,
+  destination, and any waypoints, if applicable. In the HTML body: View example The following example shows directions using different
+  modes of travel between the Haight-Ashbury to Ocean Beach in
+  San Francisco, CA: In the HTML body: View example A DirectionsRenderer not only handles display
+  of the polyline and any associated markers, but also can handle
+  the textual display of directions as a series of steps. To do
+  so, call setPanel() on your
+  DirectionsRenderer, passing it the
+  <div> in which to display this information.
+  Doing so also ensures that you display the appropriate copyright
+  information, and any warnings which may be associated with the
+  result. Textual directions will be provided using the browser's
+  preferred language setting, or the language specified when
+  loading the API JavaScript using the language
+  parameter. (For more information, see
+  
+  Localization.) In the case of transit directions, the time will be
+  displayed in the time zone at that transit stop. The following example is identical to that shown above,
+  but includes a <div> panel in which to
+  display directions: In the HTML body: View example When sending a directions request to the
+  DirectionsService, you receive a response consisting of
+  a status code, and a result, which is a DirectionsResult
+  object. The DirectionsResult is an object literal
+  with the following fields: 
+Note: The via_waypoint property is deprecated
+  in alternative routes. Version 3.27 is the last version of the API that adds extra via waypoints
+  in alternative routes. For versions 3.28 and higher of the API, you can continue to implement
+  draggable directions using the Directions service by disabling the dragging of alternative routes.
+  Only the main route should be draggable. Users can drag the main route until it matches an
+  alternative route.
+ A DirectionsGeocodedWaypoint contains details about the geocoding of
+origin, destination and waypoints. The DirectionsGeocodedWaypoint is an object literal with
+  the following fields: partial_match indicates that the geocoder did not return
+an exact match for the original request, though it was able to match part of
+the requested address. You may wish to examine the original request for misspellings and/or
+an incomplete address. Partial matches most often occur for street addresses that do not exist
+within the locality you pass in the request. Partial matches may also be
+returned when a request matches two or more locations in the same locality.
+For example, ""Hillpar St, Bristol, UK"" will return a partial match for both
+Henry Street and Henrietta Street. Note that if a request includes a
+misspelled address component, the geocoding service may suggest an alternative
+address. Suggestions triggered in this way will also be marked as a partial
+match. Note: The legacy DirectionsTrip object has
+  been renamed DirectionsRoute. Note that a route
+  now refers to the entire start to end journey, rather than simply
+  a leg of a parent trip. A DirectionsRoute contains a single result from
+  the specified origin and destination. This route may consist of
+  one or more legs (of type DirectionsLeg)
+  depending on whether any waypoints were specified. As well, the
+  route also contains copyright and warning information which must
+  be displayed to the user in addition to the routing information. The DirectionsRoute is an object literal with
+  the following fields: Note: The legacy DirectionsRoute object has
+  been renamed DirectionsLeg. A DirectionsLeg defines a single leg of a
+  journey from the origin to the destination in the calculated route.
+  For routes that contain no waypoints, the route will consist of a
+  single ""leg,"" but for routes that define one or more waypoints,
+  the route will consist of one or more legs, corresponding to the
+  specific legs of the journey. The DirectionsLeg is an object literal with the
+  following fields: distance indicates the total distance covered
+    by this leg, as a Distance object of the
+    following form: These fields may be undefined if the distance is unknown. duration indicates the total duration of
+    this leg, as a Duration object of
+    the following form: These fields may be undefined if the duration is unknown. duration_in_traffic indicates the total duration of this
+    leg, taking into account current traffic conditions. The
+    duration_in_traffic is returned only if all of the following
+    are true: The duration_in_traffic contains the following fields: A DirectionsStep is the most atomic unit of a
+  direction's route, containing a single step describing a specific, single
+  instruction on the journey. E.g. ""Turn left at W. 4th St."" The step not
+  only describes the instruction but also contains distance and duration
+  information relating to how this step relates to the following step.
+  For example, a step denoted as ""Merge onto I-80 West"" may contain a
+  duration of ""37 miles"" and ""40 minutes,"" indicating that the next step
+  is 37 miles/40 minutes from this step. When using the Directions service to search for transit directions, the
+  steps array will include additional Transit
+  Specific Information in the form of a transit object. If
+  the directions include multiple modes of transportation, detailed directions
+  will be provided for walking or driving steps in a steps[] array.
+  For example, a walking step will include directions from the start and end
+  locations: ""Walk to Innes Ave & Fitch St"". That step will include
+  detailed walking directions for that route in the steps[]
+  array, such as: ""Head north-west"", ""Turn left onto Arelious Walker"", and
+  ""Turn left onto Innes Ave"". The DirectionsStep is an object literal with the
+  following fields: Transit directions return additional information that is not relevant for
+  other modes of transportation. These additional properties are exposed
+  through the TransitDetails object, returned as a property of
+  DirectionsStep. From the TransitDetails object
+  you can access additional information for the TransitStop,
+  TransitLine, TransitAgency, and
+  VehicleType objects as described below. The TransitDetails object exposes the following
+     properties: The TransitLine object exposes the following properties: Note: If you are rendering transit directions manually
+      instead of using the DirectionsRenderer object, you must
+      display the names and URLs of the transit agencies servicing the trip
+      results.
+   The VehicleType object exposes the following
+  properties: The DirectionsResults components —
+  DirectionsRoute, DirectionsLeg,
+  DirectionsStep and TransitDetails — may be
+  inspected and used when parsing any directions response. Important: If you are rendering transit
+    directions manually instead of using the DirectionsRenderer
+    object, you must display the names and URLs of the transit agencies
+    servicing the trip results. The following example plots walking directions to certain tourist
+  attractions in New York City. We inspect the route's
+  DirectionsStep to add markers for each step, and
+  attach information to an InfoWindow with instructional
+  text for that step. Note: Since we are calculating walking directions, we also display
+  any warnings to the user in a separate <div> panel. In the HTML body: View example As noted within the DirectionsRequest,
+  you may also specify waypoints
+  (of type DirectionsWaypoint) when calculating
+  routes using the Directions service for walking, bicycling or driving
+  directions. Waypoints are not available for transit directions.
+  Waypoints allow you to calculate routes through additional locations, in
+  which case the returned route passes through the given waypoints. A waypoint consists of the following fields: By default, the Directions service calculates a route through
+  the provided waypoints in their given order. Optionally, you
+  may pass optimizeWaypoints: true within the 
+  DirectionsRequest to allow the Directions service to
+  optimize the provided route by rearranging the waypoints in
+  a more efficient order. (This optimization is an application of the
+  
+  traveling salesperson problem.) Travel time is the primary factor which is
+  optimized, but other factors such as distance, number of turns and many more
+  may be taken into account when deciding which route is the most efficient. All
+  waypoints must be stopovers for the Directions service to optimize their
+  route. If you instruct the Directions service to optimize the order of
+  its waypoints, their order will be returned in the
+  waypoint_order field within the
+  DirectionsResult object. The following example calculates cross-country routes across
+  the United States using a variety of start points, end points,
+  and waypoints. (To select multiple waypoints, press
+  Ctrl-Click when selecting items within the list.)
+  Note that we inspect the routes.start_address
+  and routes.end_address to provide
+  us with the text for each route's start and end point. The following usage limits and restrictions apply: Users may modify cycling, walking or driving directions displayed using a
+  DirectionsRenderer dynamically if they are
+  draggable, allowing a user to select and alter
+  routes by clicking and dragging the resulting paths on the map.
+  You indicate whether a renderer's display allows draggable
+  directions by setting its draggable property
+  to true. Transit directions cannot be made draggable. When directions are draggable, a user may select any point on
+  the path (or waypoint) of the rendered result and move the indicated
+  component to a new location. The DirectionsRenderer
+  will dynamically update to show the modified path. Upon release, a
+  transitional waypoint will be added to the map (indicated by
+  a small white marker). Selecting and moving a path segment will
+  alter that leg of the route, while selecting and moving
+  a waypoint marker (including start and end points) will alter the
+  legs of the route passing through that waypoint. Because draggable directions are modified and rendered client-side,
+  you may wish to monitor and handle the directions_changed
+  event on the DirectionsRenderer to be notified when the
+  user has modified the displayed directions. The following code shows a trip from Perth on the west coast of Australia
+  to Sydney on the east coast. The code monitors the
+  directions_changed event to update the total distance
+  of all legs of the journey. Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License, and code samples are licensed under the Apache 2.0 License. For details, see the Google Developers Site Policies. Java is a registered trademark of Oracle and/or its affiliates. Last updated 2025-08-18 UTC."
+Rizoma | Doppiozero,http://www.doppiozero.com/dossier/anniottanta/rizoma,1472098749,,unread,
+Concerto Digital Asset Management System,http://concerto.sourceforge.net/,1501167633,dam,unread,
+Derivative Calculator • With Steps!,https://www.derivative-calculator.net/,1666417934,,unread,
